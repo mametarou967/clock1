@@ -1,10 +1,11 @@
 module CLOCK1 (
     input       [3:0]   SW,
-    output reg  [6:0]   HEX0
+    output  [6:0]   HEX0
 );
 
 /* 7セグメント表示デコーダ              */
 /* 各セグメントはgfedcbaの並びで0で点灯 */
+/*
 always @* begin
     case( SW )
         4'h0:   HEX0 = 7'b1000000;
@@ -26,5 +27,8 @@ always @* begin
         default:HEX0 = 7'b1111111;
     endcase
 end
+*/
+
+seg7dec seg7dec_ins(.seg(SW),.dec(HEX0));
 
 endmodule
