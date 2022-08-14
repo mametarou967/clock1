@@ -6,18 +6,7 @@ module CLOCK1 (
     output  [6:0]   HEX1
 );
 
-reg[25:0] cnt;
-wire en1hz = (cnt == 26'd49_999_999);
-
-always @ (posedge CLK) begin
-  if(RST)
-    cnt <= 26'b0;
-  else if( en1hz )
-    cnt <= 26'b0;
-  else
-    cnt <= cnt + 26'b1;
-end
-
+wire en1hz;
 reg [3:0] sec;
 
 always@(posedge CLK) begin
@@ -30,6 +19,7 @@ always@(posedge CLK) begin
       sec <= sec + 4'h1;
 end
 
+cnt1sec cnt1sec_ins(.clk(CLK),.rst(RST),.en1hz(en1hz));
 seg7dec seg7dec_ins1(.seg(sec),.dec(HEX0));
 seg7dec seg7dec_ins2(.seg(sec),.dec(HEX1));
 
