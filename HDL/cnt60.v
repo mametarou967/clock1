@@ -1,9 +1,10 @@
 module cnt60(
 	input clk,
 	input rst,
-	input en1hz,
+	input enin,
    output  reg [3:0]   sec,
-   output  reg [3:0]   min
+   output  reg [3:0]   min,
+	output  enout
 );
 
 // reg  [3:0] sec;
@@ -11,7 +12,7 @@ module cnt60(
 always @( posedge clk ) begin
     if ( rst )
         sec <= 4'h0;
-    else if ( en1hz )
+    else if ( enin )
         if ( sec==4'h9 )
             sec <= 4'h0;
         else
@@ -24,12 +25,14 @@ end
 always @( posedge clk ) begin
     if( rst )
         min <= 3'd0;
-    else if( en1hz && sec==4'd9 ) begin
+    else if( enin && sec==4'd9 ) begin
         if( min==3'd5 )
             min <= 3'd0;
         else
             min <= min + 3'd1;
     end
 end
+
+assign enout = ((min == 3'd5) && (sec == 4'd9) && enin) ? 1 : 0;
 
 endmodule
