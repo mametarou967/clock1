@@ -1,7 +1,6 @@
-module cnt60(
+module mincnt(
 	input clk,
 	input rst,
-	input clr,
 	input enin,
 	input inc,
    output  reg [3:0]   sec,
@@ -12,7 +11,7 @@ module cnt60(
 // reg  [3:0] sec;
 
 always @( posedge clk ) begin
-    if ( rst | clr )
+    if ( rst )
         sec <= 4'h0;
     else if ( enin  || inc )
         if ( sec==4'h9 )
@@ -25,7 +24,7 @@ end
 // reg  [3:0] min;
 
 always @( posedge clk ) begin
-    if( rst | clr )
+    if( rst  )
         min <= 3'd0;
     else if( ( enin || inc ) && sec==4'd9 ) begin
         if( min==3'd5 )
