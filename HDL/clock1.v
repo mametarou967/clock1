@@ -21,8 +21,8 @@ btn_in btn_in_ins(.clk(CLK),.rst(RST),.nBIN(KEY),.BOUT({min_up,sec_up,clr}));
 // 1秒カウンタの生成
 cnt1sec cnt1sec_ins(.clk(CLK),.rst(RST),.en1hz(en1hz));
 // 60秒カウンタ 
-cnt60 cnt60_ins_sec(.clk(CLK),.rst(RST),.clr(clr),.enin(en1hz),.min(sec_upper),.sec(sec_lower),.enout(min_enable));
-cnt60 cnt60_ins_min(.clk(CLK),.rst(RST),.clr(clr),.enin(min_enable),.min(min_upper),.sec(min_lower));
+cnt60 cnt60_ins_sec(.clk(CLK),.rst(RST),.clr(clr),.enin(en1hz),.inc(sec_up),.min(sec_upper),.sec(sec_lower),.enout(min_enable));
+cnt60 cnt60_ins_min(.clk(CLK),.rst(RST),.clr(clr),.enin(min_enable),.inc(min_up),.min(min_upper),.sec(min_lower));
 // 7seg
 seg7dec seg7dec_ins1(.seg(sec_lower),.dec(HEX0));
 seg7dec seg7dec_ins2(.seg(sec_upper),.dec(HEX1));
